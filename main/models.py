@@ -13,3 +13,12 @@ class MeterModel(models.Model):
 
     class Meta:
         unique_together = ["manufacturer", "model_name"]
+
+
+class Meter(models.Model):
+    number = models.IntegerField()
+    meter_model = models.ForeignKey(MeterModel, on_delete=models.CASCADE)
+    manufacturer_date = models.DateField()
+
+    class Meta:
+        unique_together = ["number", "meter_model", "manufacturer_date"]
