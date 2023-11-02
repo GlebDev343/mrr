@@ -35,3 +35,13 @@ class PersonalAccount(models.Model):
     phone_number = models.IntegerField(null=True)
     verification_code = models.CharField()
     code_validity = models.DateTimeField(default=datetime(2000, 1, 1, 0, 0))
+
+
+class InstalledMeter(models.Model):
+    personal_account = models.ForeignKey(PersonalAccount, on_delete=models.CASCADE)
+    meter = models.ForeignKey(Meter, on_delete=models.CASCADE)
+    installation_date = models.DateField()
+    remove_date = models.DateField(null=True, blank=True)
+
+    class Meta:
+        unique_together = ["personal_account", "meter", "installation_date"]
