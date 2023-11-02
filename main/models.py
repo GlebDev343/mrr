@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 
 
@@ -22,3 +23,15 @@ class Meter(models.Model):
 
     class Meta:
         unique_together = ["number", "meter_model", "manufacturer_date"]
+
+
+class PersonalAccount(models.Model):
+    address = models.CharField()
+    account_number = models.IntegerField(unique=True)
+    first_name = models.CharField(max_length=50)
+    patronymic = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    email = models.CharField(null=True, blank=True)
+    phone_number = models.IntegerField(null=True)
+    verification_code = models.CharField()
+    code_validity = models.DateTimeField(default=datetime(2000, 1, 1, 0, 0))
