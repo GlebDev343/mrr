@@ -45,3 +45,12 @@ class InstalledMeter(models.Model):
 
     class Meta:
         unique_together = ["personal_account", "meter", "installation_date"]
+
+
+class MeterReading(models.Model):
+    current_value = models.IntegerField()
+    time_of_taking = models.DateTimeField()
+    installed_meter = models.ForeignKey(InstalledMeter, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ["installed_meter", "current_value", "time_of_taking"]
